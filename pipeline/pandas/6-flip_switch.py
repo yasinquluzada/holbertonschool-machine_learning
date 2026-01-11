@@ -6,12 +6,14 @@ import pandas as pd
 
 
 def flip_switch(df):
-    """Sort the DataFrame in reverse chronological order and transpose it.
+    """Sort the data in reverse chronological order, then transpose it.
 
     Args:
-        df: pandas.DataFrame.
+        df (pd.DataFrame): Input DataFrame.
 
     Returns:
-        pandas.DataFrame: The sorted and transposed DataFrame.
+        pd.DataFrame: The sorted and transposed DataFrame.
     """
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("df must be a pandas.DataFrame")
     return df.sort_index(ascending=False).T
