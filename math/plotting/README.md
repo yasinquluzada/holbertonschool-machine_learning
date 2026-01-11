@@ -1,3 +1,3 @@
 # math/plotting
 
-Matplotlib plotting tasks for Holberton School Machine Learning.
+Plotting tasks using NumPy and Matplotlib.
