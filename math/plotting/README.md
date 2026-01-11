@@ -1,3 +1,3 @@
-# math/plotting
+# Plotting
 
-This directory contains plotting tasks using NumPy and Matplotlib.
+Matplotlib plotting tasks for Holberton School Machine Learning.
