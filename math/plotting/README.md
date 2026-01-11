@@ -1,3 +1,3 @@
-# Plotting
+# math/plotting
 
-Matplotlib plotting tasks.
+Plotting tasks using NumPy and Matplotlib.
