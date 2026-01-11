@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # math/plotting
 
 This directory contains plotting tasks using NumPy and Matplotlib.
@@ -12,7 +11,7 @@ This directory contains plotting tasks using NumPy and Matplotlib.
   - numpy (version 1.25.2)
   - matplotlib (version 3.8.3)
 - All files should end with a new line
-- The first line of all files should be exactly: `#!/usr/bin/env python3`
+- The first line of all your Python files should be exactly: `#!/usr/bin/env python3`
 - A README.md file, at the root of the folder of the project, is mandatory
 - Code should use the pycodestyle style (version 2.11.1)
 - All modules should have documentation:
