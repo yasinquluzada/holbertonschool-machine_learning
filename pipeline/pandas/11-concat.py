@@ -2,12 +2,14 @@
 """Concat module."""
 
 
+import pandas as pd
+
+
 index = __import__('10-index').index
-pd = __import__('pandas')
 
 
 def concat(df1, df2):
-    """Index on Timestamp, prepend filtered bitstamp rows, and add source keys.
+    """Index both dataframes, prepend selected bitstamp rows, and add keys.
 
     Args:
         df1: pandas.DataFrame (coinbase).
@@ -18,5 +20,5 @@ def concat(df1, df2):
     """
     df1_i = index(df1)
     df2_i = index(df2)
-    df2_sel = df2_i[df2_i.index <= 1417411920]
+    df2_sel = df2_i.loc[df2_i.index <= 1417411920]
     return pd.concat([df2_sel, df1_i], keys=["bitstamp", "coinbase"])
