@@ -1,3 +1,3 @@
 # Math - Calculus
 
-Python scripts for calculus tasks.
+Answers and scripts for the calculus part of the math module.
