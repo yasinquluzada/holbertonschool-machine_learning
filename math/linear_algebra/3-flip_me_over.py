@@ -3,9 +3,6 @@
 def matrix_transpose(matrix):
     #return [list(col) for col in zip(*matrix)]
 
-
-
-
-    for i in range(len(matrix)):
-        for j in range(len(matrix(i))):
-           matrix[i][j] = matrix[j][i]
+    rows = len(matrix)
+    columns = (len(matrix[0]))
+    return [[matrix[r][c] for r in range(rows)]] for c in range(cols)]
