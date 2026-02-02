@@ -1,1 +1,3 @@
-Add array slicing task solution
+# Linear Algebra
+
+Holberton School Machine Learning — Linear Algebra tasks.
