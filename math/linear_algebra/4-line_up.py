@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+"""Element-wise addition for two same-length numeric arrays."""
+
 
 def add_arrays(arr1, arr2):
-    rows = len(arr1)
-    columns = len(arr2[0])
-    for i in range(rows):
-        for j in range(columns):
-            arr1[i][j] = arr2[i][j] + arr1[i][j]
+    """Return a new list with element-wise sums, or None if shapes differ."""
+    if len(arr1) != len(arr2):
+        return None
+    return [a + b for a, b in zip(arr1, arr2)]
