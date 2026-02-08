@@ -1,3 +1,3 @@
 # Advanced Linear Algebra
 
-Holberton School Machine Learning — Advanced Linear Algebra tasks.
+This directory contains advanced linear algebra tasks implemented in Python 3.
