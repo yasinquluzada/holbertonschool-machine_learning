@@ -1,6 +1,3 @@
 # Advanced Linear Algebra
 
-This project contains functions for advanced linear algebra tasks.
-
-## Tasks
-- `0-determinant.py`: Compute the determinant of a square matrix.
+Tasks for computing determinants, minors, adjugates, cofactors, and related matrix operations in pure Python.
