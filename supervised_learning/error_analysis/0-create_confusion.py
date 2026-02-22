@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Creates a confusion matrix for one-hot encoded classification outputs."""
+"""Creates a confusion matrix for one-hot classification outputs."""
 
 import numpy as np
 
@@ -9,11 +9,11 @@ def create_confusion_matrix(labels, logits):
 
     Args:
         labels (np.ndarray): One-hot array of shape (m, classes) of true labels.
-        logits (np.ndarray): One-hot array of shape (m, classes) of predicted labels.
+        logits (np.ndarray): One-hot array of shape (m, classes) of predictions.
 
     Returns:
-        np.ndarray: Confusion matrix of shape (classes, classes) where rows are
-        true classes and columns are predicted classes.
+        np.ndarray: Confusion matrix of shape (classes, classes).
+        Rows are true classes; columns are predicted classes.
     """
     true_idx = np.argmax(labels, axis=1)
     pred_idx = np.argmax(logits, axis=1)
