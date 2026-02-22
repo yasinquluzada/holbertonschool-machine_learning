@@ -1,12 +1,8 @@
 # Error Analysis
 
-This directory contains utilities for evaluating classification models.
+Utilities for analyzing model performance using confusion matrices.
 
-## 2. Precision
+## 3-specificity.py
 
-`2-precision.py` implements `precision(confusion)` to compute per-class precision from a confusion matrix.
-
-- Confusion matrix shape: `(classes, classes)`
-- Rows: true labels
-- Columns: predicted labels
-- Output: precision per class, shape `(classes,)`
+Implements `specificity(confusion)` which returns the specificity for each class
+in a multi-class confusion matrix.
