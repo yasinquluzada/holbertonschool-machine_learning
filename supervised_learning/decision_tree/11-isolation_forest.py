@@ -54,6 +54,8 @@ class Isolation_Random_Forest:
                 )
             )
 
+        self.seed += n_trees
+
     def suspects(self, explanatory, n_suspects):
         """Return the rows with the smallest mean depths."""
         depths = self.predict(explanatory)
