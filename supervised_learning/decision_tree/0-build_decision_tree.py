@@ -28,9 +28,10 @@ class Node:
 
     def max_depth_below(self):
         """Return the maximum depth below this node."""
-        left_depth = self.left_child.max_depth_below()
-        right_depth = self.right_child.max_depth_below()
-        return max(left_depth, right_depth)
+        return max(
+            self.left_child.max_depth_below(),
+            self.right_child.max_depth_below(),
+        )
 
 
 class Leaf(Node):
@@ -44,7 +45,7 @@ class Leaf(Node):
         self.depth = depth
 
     def max_depth_below(self):
-        """Return the leaf depth."""
+        """Return the depth of the leaf."""
         return self.depth
 
 
