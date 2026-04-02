@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Decision tree module with leaf collection support."""
+"""Decision tree module with leaf retrieval support."""
 
 import numpy as np
 
@@ -27,7 +27,7 @@ class Node:
         self.depth = depth
 
     def max_depth_below(self):
-        """Return the maximum depth under this node."""
+        """Return the maximum depth below this node."""
         depths = [self.depth]
         if self.left_child is not None:
             depths.append(self.left_child.max_depth_below())
@@ -36,7 +36,7 @@ class Node:
         return max(depths)
 
     def get_leaves_below(self):
-        """Return the list of leaves under this node."""
+        """Return the list of all leaves below this node."""
         leaves = []
         if self.left_child is not None:
             leaves.extend(self.left_child.get_leaves_below())
@@ -65,7 +65,11 @@ class Leaf(Node):
 
     def __str__(self):
         """Return the string representation of the leaf."""
-        return "-> leaf [value={}] ".format(self.value)
+        return "-> leaf [value={}]".format(self.value)
+
+    def __repr__(self):
+        """Return the official string representation of the leaf."""
+        return self.__str__()
 
 
 class Decision_Tree:
@@ -97,5 +101,5 @@ class Decision_Tree:
         return self.root.max_depth_below()
 
     def get_leaves(self):
-        """Return all leaves of the tree."""
+        """Return the list of all leaves in the tree."""
         return self.root.get_leaves_below()
