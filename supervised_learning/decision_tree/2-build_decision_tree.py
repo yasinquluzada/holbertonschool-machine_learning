@@ -34,7 +34,7 @@ class Node:
         )
 
     def left_child_add_prefix(self, text):
-        """Add the display prefix for a left child."""
+        """Add prefix to the left child string."""
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for line in lines[1:]:
@@ -42,7 +42,7 @@ class Node:
         return new_text
 
     def right_child_add_prefix(self, text):
-        """Add the display prefix for a right child."""
+        """Add prefix to the right child string."""
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for line in lines[1:]:
@@ -63,7 +63,7 @@ class Node:
             )
         text += self.left_child_add_prefix(str(self.left_child))
         text += self.right_child_add_prefix(str(self.right_child))
-        return text[:-1]
+        return text
 
 
 class Leaf(Node):
