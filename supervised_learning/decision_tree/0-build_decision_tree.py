@@ -28,12 +28,9 @@ class Node:
 
     def max_depth_below(self):
         """Return the maximum depth below this node."""
-        depths = [self.depth]
-        if self.left_child is not None:
-            depths.append(self.left_child.max_depth_below())
-        if self.right_child is not None:
-            depths.append(self.right_child.max_depth_below())
-        return max(depths)
+        left_depth = self.left_child.max_depth_below()
+        right_depth = self.right_child.max_depth_below()
+        return max(left_depth, right_depth)
 
 
 class Leaf(Node):
@@ -76,5 +73,5 @@ class Decision_Tree:
         self.predict = None
 
     def depth(self):
-        """Return the tree depth."""
+        """Return the maximum depth of the tree."""
         return self.root.max_depth_below()
