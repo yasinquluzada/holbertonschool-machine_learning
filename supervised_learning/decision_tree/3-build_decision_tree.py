@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Decision tree module."""
+"""Decision tree module with leaf collection support."""
 
 import numpy as np
 
@@ -27,25 +27,22 @@ class Node:
         self.depth = depth
 
     def max_depth_below(self):
-        """Return the maximum depth below this node."""
-        return max(
-            self.left_child.max_depth_below(),
-            self.right_child.max_depth_below(),
-        )
-
-    def count_nodes_below(self):
-        """Return the number of nodes below this node."""
-        return 1 + (
-            self.left_child.count_nodes_below() +
-            self.right_child.count_nodes_below()
-        )
+        """Return the maximum depth under this node."""
+        depths = [self.depth]
+        if self.left_child is not None:
+            depths.append(self.left_child.max_depth_below())
+        if self.right_child is not None:
+            depths.append(self.right_child.max_depth_below())
+        return max(depths)
 
     def get_leaves_below(self):
-        """Return the list of all leaves below this node."""
-        return (
-            self.left_child.get_leaves_below() +
-            self.right_child.get_leaves_below()
-        )
+        """Return the list of leaves under this node."""
+        leaves = []
+        if self.left_child is not None:
+            leaves.extend(self.left_child.get_leaves_below())
+        if self.right_child is not None:
+            leaves.extend(self.right_child.get_leaves_below())
+        return leaves
 
 
 class Leaf(Node):
@@ -58,21 +55,17 @@ class Leaf(Node):
         self.is_leaf = True
         self.depth = depth
 
-    def __str__(self):
-        """Return the string representation of the leaf."""
-        return "-> leaf [value={}] ".format(self.value)
-
     def max_depth_below(self):
         """Return the depth of the leaf."""
         return self.depth
 
-    def count_nodes_below(self):
-        """Return the number of nodes below this leaf."""
-        return 1
-
     def get_leaves_below(self):
-        """Return the leaf as a single-item list."""
+        """Return this leaf in a list."""
         return [self]
+
+    def __str__(self):
+        """Return the string representation of the leaf."""
+        return "-> leaf [value={}] ".format(self.value)
 
 
 class Decision_Tree:
@@ -103,10 +96,6 @@ class Decision_Tree:
         """Return the maximum depth of the tree."""
         return self.root.max_depth_below()
 
-    def count_nodes(self):
-        """Return the number of nodes in the tree."""
-        return self.root.count_nodes_below()
-
     def get_leaves(self):
-        """Return the list of all leaves of the tree."""
+        """Return all leaves of the tree."""
         return self.root.get_leaves_below()
