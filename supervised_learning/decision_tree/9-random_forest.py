@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Random forest module."""
 
-Decision_Tree = __import__('8-build_decision_tree').Decision_Tree
 import numpy as np
+
+Decision_Tree = __import__("8-build_decision_tree").Decision_Tree
 
 
 class Random_Forest:
@@ -20,22 +21,30 @@ class Random_Forest:
 
     def predict(self, explanatory):
         """Predict the class of each example."""
+        predictors = self.numpy_preds
+        if predictors is None:
+            predictors = self.numpy_predicts
         predictions = np.array(
-            [predictor(explanatory) for predictor in self.numpy_preds]
+            [predictor(explanatory) for predictor in predictors]
         )
         if predictions.size == 0:
             return np.array([])
-        modes = []
+        forest_predictions = []
         for column in predictions.T:
             values, counts = np.unique(column, return_counts=True)
-            modes.append(values[np.argmax(counts)])
-        return np.array(modes)
+            forest_predictions.append(values[np.argmax(counts)])
+        return np.array(forest_predictions)
 
     def fit(self, explanatory, target, n_trees=100, verbose=0):
         """Train the random forest."""
+        if n_trees == 100 and self.n_trees != 100:
+            n_trees = self.n_trees
+        else:
+            self.n_trees = n_trees
         self.target = target
         self.explanatory = explanatory
         self.numpy_preds = []
+        self.numpy_predicts = self.numpy_preds
         depths = []
         nodes = []
         leaves = []
@@ -51,7 +60,9 @@ class Random_Forest:
             depths.append(tree.depth())
             nodes.append(tree.count_nodes())
             leaves.append(tree.count_nodes(only_leaves=True))
-            accuracies.append(tree.accuracy(tree.explanatory, tree.target))
+            accuracies.append(
+                tree.accuracy(tree.explanatory, tree.target)
+            )
         if verbose == 1:
             print(
                 f"""  Training finished.
@@ -59,11 +70,16 @@ class Random_Forest:
     - Mean number of nodes           : {np.array(nodes).mean()}
     - Mean number of leaves          : {np.array(leaves).mean()}
     - Mean accuracy on training data : {np.array(accuracies).mean()}
-    - Accuracy of the forest on td   : {self.accuracy(self.explanatory, self.target)}"""
+    - Accuracy of the forest on td   : {
+        self.accuracy(self.explanatory, self.target)
+    }"""
             )
 
     def accuracy(self, test_explanatory, test_target):
         """Compute the prediction accuracy."""
-        return np.sum(
-            np.equal(self.predict(test_explanatory), test_target)
-        ) / test_target.size
+        return (
+            np.sum(
+                np.equal(self.predict(test_explanatory), test_target)
+            )
+            / test_target.size
+        )
