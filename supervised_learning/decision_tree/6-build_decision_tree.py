@@ -111,8 +111,6 @@ class Node:
         if x[self.feature] > self.threshold:
             return self.left_child.pred(x)
         return self.right_child.pred(x)
-    
-
 
 
 class Leaf(Node):
@@ -144,8 +142,6 @@ class Leaf(Node):
     def pred(self, x):
         """Return the prediction for one sample."""
         return self.value
-    
-
 
 
 class Decision_Tree:
@@ -204,7 +200,3 @@ class Decision_Tree:
             [leaf.indicator(A) * leaf.value for leaf in leaves],
             axis=0,
         )
-    
-
-    
-
