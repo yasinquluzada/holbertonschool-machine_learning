@@ -28,41 +28,41 @@ class Node:
 
     def max_depth_below(self):
         """Return the maximum depth below this node."""
-        return max(
-            self.left_child.max_depth_below(),
-            self.right_child.max_depth_below(),
-        )
+        left_depth = self.depth
+        right_depth = self.depth
+        if self.left_child is not None:
+            left_depth = self.left_child.max_depth_below()
+        if self.right_child is not None:
+            right_depth = self.right_child.max_depth_below()
+        return max(left_depth, right_depth)
 
     def left_child_add_prefix(self, text):
-        """Add prefix to the left child string."""
+        """Add the left-child prefix to a subtree string."""
         lines = text.split("\n")
-        new_text = "    +--" + lines[0] + "\n"
+        new_lines = ["    +--" + lines[0]]
         for line in lines[1:]:
-            new_text += "    |  " + line + "\n"
-        return new_text
+            new_lines.append("    |  " + line)
+        return "\n".join(new_lines)
 
     def right_child_add_prefix(self, text):
-        """Add prefix to the right child string."""
+        """Add the right-child prefix to a subtree string."""
         lines = text.split("\n")
-        new_text = "    +--" + lines[0] + "\n"
+        new_lines = ["    +--" + lines[0]]
         for line in lines[1:]:
-            new_text += "       " + line + "\n"
-        return new_text
+            new_lines.append("       " + line)
+        return "\n".join(new_lines)
 
     def __str__(self):
         """Return the string representation of the node."""
-        if self.is_root:
-            text = (
-                f"root [feature={self.feature}, "
-                f"threshold={self.threshold}]\n"
-            )
-        else:
-            text = (
-                f"-> node [feature={self.feature}, "
-                f"threshold={self.threshold}]\n"
-            )
-        text += self.left_child_add_prefix(str(self.left_child))
-        text += self.right_child_add_prefix(str(self.right_child))
+        node_type = "root" if self.is_root else "-> node"
+        text = (
+            f"{node_type} [feature={self.feature}, "
+            f"threshold={self.threshold}]"
+        )
+        if self.left_child is not None:
+            text += "\n" + self.left_child_add_prefix(str(self.left_child))
+        if self.right_child is not None:
+            text += "\n" + self.right_child_add_prefix(str(self.right_child))
         return text
 
 
